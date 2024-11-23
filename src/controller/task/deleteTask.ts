@@ -1,25 +1,18 @@
-import { Request, Response } from 'express';
-import { deleteTask } from '../../repositories/deleteTask';
+import { Request, Response, NextFunction } from 'express';
+import { deleteTask } from '../../repositories/tasks';
 
-export const deleteTaskController = async (req: Request, res: Response) => {
+export const deleteTaskController = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        console.log(req.query);
         
-        
-       await deleteTask(req.body);
+        await deleteTask(req.query);
 
-        
-            return res.status(200).json({
-                success: true,
-                data: {},
-                message: 'task deleted successfully!',
-            });
-        
-    } catch (error: any) {
-        console.error('Error in getUserController:', error.message);
-
-        return res.status(500).json({
-            success: false,
-            message: 'An error occurred while retrieving the user.',
+        res.status(200).json({
+            success: true,
+            data: {},
+            message: 'Task deleted successfully!',
         });
+    } catch (error) {
+        next(error);
     }
 };

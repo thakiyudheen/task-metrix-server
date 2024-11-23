@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
-import { isUserExist, signup } from '../../repositories';
+import { isUserExist, signup } from '../../repositories/auth';
 import { hashPassword } from '../../utils/bcrypt/bcrypt';
 import { jwtToken } from '../../utils/jwt/jwtToken';
 import signupValidationSchema from '../../utils/validation/signupSchema'; 

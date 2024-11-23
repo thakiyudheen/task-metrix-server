@@ -1,44 +1,35 @@
-import { createTask } from '../../repositories/createTask';
-import { getUser } from '../../repositories';
-import { Request, Response } from 'express';
+import { createTask } from '../../repositories/tasks';
+import { Request, Response, NextFunction } from 'express';
+import { UnauthorizedError, ValidationError } from '../../utils/errors/customError';
 
-export const createTaskController = async (req: Request, res: Response) => {
+export const createTaskController = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        
-        console.log('the task',req.body);
-        
-        // if (!req.user) {
-        //     return res.status(401).json({
-        //         success: false,
-        //         message: 'The user is not authenticated!',
-        //     });
-        // }
+        console.log('Received task data:', req.body);
+         
+         console.log('this is okey',req.user);
+         
+        if (req.user==undefined) {
+            throw new UnauthorizedError("The user is not authenticated");
+        }
+
+        if (!req.body || Object.keys(req.body).length === 0) {
+            throw new ValidationError("Task data is required");
+        }
 
         
         const task = await createTask(req.body);
 
-        console.log('the real task',task);
-        
-        if (task) {
-            return res.status(200).json({
-                success: true,
-                data: task,
-                message: 'task added successfully!',
-            });
-        } else {
-            return res.status(200).json({
-                success: false,
-                data:{},
-                message: 'task crettion filed!',
-            });
+        if (!task) {
+            throw new ValidationError("Task creation failed");
         }
 
-    } catch (error: any) {
-        console.error('Error in cateatTaskController:', error.message);
-
-        return res.status(500).json({
-            success: false,
-            message: 'An error occurred while retrieving the user.',
+       
+        res.status(200).json({
+            success: true,
+            data: task,
+            message: "Task added successfully!",
         });
+    } catch (error) {
+        next(error);
     }
 };

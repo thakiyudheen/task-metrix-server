@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { isUserExist } from '../../repositories/isUserExist';
+import { isUserExist } from '../../repositories/auth';
 
 export const isUserExistController = async (
   req: Request,

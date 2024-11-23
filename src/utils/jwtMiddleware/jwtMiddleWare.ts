@@ -21,7 +21,7 @@ export const jwtMiddleware = (req: Request, res: Response, next: NextFunction): 
     console.log('This is the token:', jwtToken);
 
     if (!jwtToken) {
-        return next(); // No token present, just proceed to the next middleware
+        return next(); 
     }
     if(!process.env.ACCESS_TOKEN_SECRET){
         return next();
@@ -33,9 +33,11 @@ export const jwtMiddleware = (req: Request, res: Response, next: NextFunction): 
         
         const user = decodedToken as unknown as UserPayload;
         req.user = user;
+        console.log('this is that user',req.user,user);
+        
         next();
     } catch (error) {
         console.error("Token verification error:", error);
-        next(error); // Pass the error to the next error-handling middleware
+        next(error); 
     }
 }

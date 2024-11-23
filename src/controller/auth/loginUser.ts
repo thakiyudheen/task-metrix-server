@@ -1,15 +1,16 @@
 import { jwtToken } from '../../utils/jwt/jwtToken';
-import { login } from '../../repositories';
+import { login } from '../../repositories/auth';
 import { comparePassword } from '../../utils/bcrypt/bcrypt';
 import { Request, Response, NextFunction } from 'express';
-import { UnauthorizedError, NotFoundError } from '../../utils/errors/constomError'; 
+import { UnauthorizedError, NotFoundError } from '../../utils/errors/customError'; 
+
 
 export const loginController = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { password, email } = req.body;
 
         
-        const user = await login({ email });
+        const user  = await login({ email });
         if (!user) {
             throw new NotFoundError('User not found!');
         }

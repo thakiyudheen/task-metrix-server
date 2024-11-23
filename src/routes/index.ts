@@ -30,7 +30,7 @@ router.route('/login').post(loginController)
 router.route('/getUser').get(jwtMiddleware,getUserController)
 
 //create task------------------------------
-router.route('/createTask').post(createTaskController)
+router.route('/createTask').post(jwtMiddleware,createTaskController)
 
 //create task------------------------------
 router.route('/deleteTask').delete(deleteTaskController)
@@ -39,7 +39,7 @@ router.route('/deleteTask').delete(deleteTaskController)
 router.route('/getTasks').get(jwtMiddleware,getTaskController)
 
 //update task------------------------------
-router.route('/updateTask').patch(updateController)
+router.route('/updateTask').put(updateController)
 
 // logout user ------------------------------
 router.route('/logout').delete(logoutController)

@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { isUserExist, signup } from '../../repositories'; 
+import { isUserExist, signup } from '../../repositories/auth'; 
 import { jwtToken } from '../../utils/jwt/jwtToken';
 import { hashPassword } from '../../utils/bcrypt/bcrypt';
-import { CustomError, ValidationError, NotFoundError } from '../../utils/errors/constomError'; 
+import { CustomError, ValidationError, NotFoundError } from '../../utils/errors/customError'; 
 
 export const googleSignupController = async (req: Request, res: Response, next: NextFunction) => {
   try {

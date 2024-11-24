@@ -17,7 +17,18 @@ declare global {
 }
 
 export const jwtMiddleware = (req: Request, res: Response, next: NextFunction): void => {
-    const { jwtToken } = req.cookies; 
+    let token =req.headers['authorization'] && req.headers['authorization'].split(' ')[1]
+    console.log('bearer token',token);
+    
+    if(token){
+        res.cookie('jwtToken', token, {
+            httpOnly: true,
+            sameSite: "none",
+            secure: true,
+        });
+    }
+    const jwtToken = req.cookies.jwtToken || (req.headers['authorization'] && req.headers['authorization'].split(' ')[1]);
+ 
     console.log('This is the token:', jwtToken);
 
     if (!jwtToken) {

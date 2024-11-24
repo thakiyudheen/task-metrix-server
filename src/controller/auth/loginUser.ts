@@ -35,6 +35,7 @@ export const loginController = async (req: Request, res: Response, next: NextFun
             success: true,
             data: user,
             message: "User login successfully!",
+            token:token
         });
 
     } catch (error: any) {

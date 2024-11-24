@@ -10,6 +10,7 @@ import { updateController } from '../controller/task/updateTask';
 import { logoutController } from '../controller/auth/logout';
 import { isUserExistController } from '../controller/auth/isUserExist';
 import { googleSignupController } from '../controller/auth/googleSignup';
+import { googleAuthController } from '../controller/auth/googleAuth';
 
 const router = Router()
 
@@ -19,6 +20,9 @@ router.route('/isExistUser/:email').get(isUserExistController)
 
 // google signup-----------------------------
 router.route('/googleSignup').post(googleSignupController)
+
+// google signup-----------------------------
+router.route('/googleAuth').post(googleAuthController)
 
 // signup a user-----------------------------
 router.route('/signup').post(signupController)

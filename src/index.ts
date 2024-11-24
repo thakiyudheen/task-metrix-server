@@ -5,6 +5,7 @@ import cors, { CorsOptions } from 'cors';
 import connectDB from './config/dbConnection';
 import cookieParser from 'cookie-parser';
 import { errorHandler } from './utils/errors/errorHandler';
+import { User } from './models/userModel';
 
 
 const app = express();
@@ -32,9 +33,11 @@ connectDB()
 app.use('/api', router); 
 
 // Test route to ensure server is working
-app.get('/hop', (req, res) => {
-  console.log('Request received at /hop');
-  res.send('Hello from /hop');
+app.get('/clear', (req, res) => {
+  User.deleteMany({}).then(()=>{
+    console.log('deleted');
+    
+  })
 });
 
 app.use(errorHandler)

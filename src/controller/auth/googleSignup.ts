@@ -41,6 +41,7 @@ export const googleSignupController = async (req: Request, res: Response, next: 
         success: true,
         data: user,
         message: 'User signed up successfully!',
+        token:token
       });
     } else {
       throw new CustomError('Something went wrong while signing up the user!', 500);

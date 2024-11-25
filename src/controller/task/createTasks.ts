@@ -6,7 +6,7 @@ export const createTaskController = async (req: Request, res: Response, next: Ne
     try {
         console.log('Received task data:', req.body);
          
-         console.log('this is okey',req.user);
+         
          
         if (req.user==undefined) {
             throw new UnauthorizedError("The user is not authenticated");
@@ -26,7 +26,7 @@ export const createTaskController = async (req: Request, res: Response, next: Ne
        
         res.status(200).json({
             success: true,
-            data: task,
+            data: task.newTask,
             message: "Task added successfully!",
         });
     } catch (error) {

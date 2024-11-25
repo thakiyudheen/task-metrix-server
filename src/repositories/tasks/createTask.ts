@@ -3,12 +3,28 @@ import { CustomError } from '../../utils/errors/customError';
 
 export const createTask = async (data: Record<string, any>) => {
     try {
-        
-        const task = await Task.create(data);
+        const { page, limit, ...rest } = data;
+        const task = await Task.create(rest);
 
-        return task;
+        const skip = (page - 1) * limit;
+
+        const totalCount = await Task.countDocuments(rest);
+        const tasks = await Task.find(rest)
+            .skip(skip)
+            .limit(limit)
+            .exec();
+
+        const totalPages = Math.ceil(totalCount / limit);
+
+        return {
+            tasks,
+            totalCount,
+            totalPages,
+            currentPage: page,
+            newTask: task,
+        };
     } catch (error: any) {
-        console.error("Error while creating task:", error.message);
-        throw new CustomError("An error occurred while creating the task", 500);
+        console.error("Error while creating and fetching tasks:", error.message);
+        throw new CustomError("An error occurred while creating or fetching tasks", 500);
     }
 };

@@ -27,7 +27,7 @@ export const getTasks = async (query:{userId:string, page: number, limit: number
         };
     } catch (error: any) {
         console.error("Error while retrieving tasks:", error.message);
-
+        // ok
         throw new CustomError("An error occurred while retrieving tasks", 500);
     }
 };

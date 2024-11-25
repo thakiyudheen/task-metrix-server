@@ -8,8 +8,8 @@ export const createTask = async (data: Record<string, any>) => {
 
         const skip = (page - 1) * limit;
 
-        const totalCount = await Task.countDocuments(rest);
-        const tasks = await Task.find(rest)
+        const totalCount = await Task.countDocuments({userId:rest.userId});
+        const tasks = await Task.find({userId:rest.userId})
             .skip(skip)
             .limit(limit)
             .exec();

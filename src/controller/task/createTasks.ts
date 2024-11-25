@@ -23,10 +23,11 @@ export const createTaskController = async (req: Request, res: Response, next: Ne
             throw new ValidationError("Task creation failed");
         }
 
+       console.log('final tasks ',task.tasks);
        
         res.status(200).json({
             success: true,
-            data: task.newTask,
+            data: task.tasks,
             message: "Task added successfully!",
         });
     } catch (error) {

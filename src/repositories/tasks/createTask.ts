@@ -21,7 +21,7 @@ export const createTask = async (data: Record<string, any>) => {
             totalCount,
             totalPages,
             currentPage: page,
-            newTask: tasks,
+            newTask: task,
         };
     } catch (error: any) {
         console.error("Error while creating and fetching tasks:", error.message);

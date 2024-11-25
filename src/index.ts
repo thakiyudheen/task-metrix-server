@@ -20,7 +20,7 @@ app.use(cookieParser());
 
 
 const corsOptions : CorsOptions = {
-  origin:[process.env.FONTENT_URL||"",'https://task-management-client.vercel.app'],
+  origin:process.env.FONTENT_URL||"",
   methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
   credentials: true,
 };

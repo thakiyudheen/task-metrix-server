@@ -13,6 +13,6 @@ export const jwtToken = (
     return jwt.sign(
         newPayload,
         String(process.env.ACCESS_TOKEN_SECRET),
-        { expiresIn: '30m' }
+        { expiresIn: '10d' }
     );
 };

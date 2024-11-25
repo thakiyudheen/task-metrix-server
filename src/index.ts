@@ -6,7 +6,8 @@ import connectDB from './config/dbConnection';
 import cookieParser from 'cookie-parser';
 import { errorHandler } from './utils/errors/errorHandler';
 import { User } from './models/userModel';
-import  {config} from 'dotenv'
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
